@@ -405,6 +405,9 @@ Relationship: R E L A T I O N S H I P;
 Query: Q U E R Y;
 Trigger: T R I G G E R;
 XData: X D A T A ;
+Import: I M P O R T;
+Include: I N C L U D E;
+IncludeGenerator: I N C L U D E G E N E R A T O R;
 
 // Reference B: Class Keywords
 Abstract: 'Abstract';

@@ -506,6 +506,10 @@ property_expression_list:
 	identifier
 	| OPEN_PARENTHESIS identifier (P_COMMA identifier)* CLOSE_PARENTHESIS;
 
+includename: identifier;
+includename_list:
+	OPEN_PARENTHESIS includename (P_COMMA includename)* CLOSE_PARENTHESIS;
+
 classname: identifier (P_DOT identifier)*;
 
 class_extend: Extends (classname | classname_list);
@@ -671,7 +675,7 @@ c_if:
 	)*;
 
 // functions
-f_select: F_SELECT OPEN_PARENTHESIS (expression P_COLON expression (P_COMMA expression P_COLON expression)*) CLOSE_PARENTHESIS;
+f_select: F_SELECT OPEN_PARENTHESIS (condition P_COLON expression (P_COMMA condition P_COLON expression)*) CLOSE_PARENTHESIS;
 f_order: F_ORDER OPEN_PARENTHESIS expression (P_COMMA expression)? (P_COMMA expression)? CLOSE_PARENTHESIS;
 f_extract: F_EXTRACT OPEN_PARENTHESIS expression (P_COMMA (expression | P_ASTERISK))? (P_COMMA (expression | P_ASTERISK))? CLOSE_PARENTHESIS;
 
@@ -732,17 +736,14 @@ xdata_definition: XData identifier cl_attributes?;
 // Storage
 storage_definition: Storage identifier storage_block;
 
+// Class includes
+class_import: Import (classname | classname_list);
+class_include: Include (includename | includename_list);
+class_includegenerator: IncludeGenerator (includename | includename_list);
+
 // Class definition
-/*
- Import import_package_list
- Include include_code
- IncludeGenerator include_generator_code
- ///
- description
- Class package.shortclassname Extends superclass_list [ class_attributes ] {
- Class_members }
- */
 class_definition:
+    (class_import | class_include | class_includegenerator)*
 	Class classname (class_extend)? cl_attributes? class_body;
 
 // Identifier
