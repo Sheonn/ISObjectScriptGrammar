@@ -253,6 +253,16 @@ special_variables:
 	| F_ZTRAP
 	| F_ZVERSION;
 
+// Common keywords
+common_keywords:
+    On
+    | As
+    | Of
+    | List
+    | Array
+    | ByRef
+    | Output;
+
 // Keywords Reference B: Class Keywords
 class_keywords:
 	Abstract
@@ -500,7 +510,7 @@ arguments: argument_list*;
 argument_list: argument | (P_COMMA argument);
 argument: ((ByRef | Output)? identifier type_definition? argument_default?)
 	| (identifier TripplePeriod);
-argument_default: assignment_operator (literal | block);
+argument_default: assignment_operator unary_expression;
 
 property_expression_list:
 	identifier
@@ -610,7 +620,7 @@ primary_expression:
 		)
 	)*;
 primary_expression_start:
-	literal
+    literal
 	| member_access
 	| identifier member_access*
 		| f_order
@@ -752,6 +762,7 @@ identifier:
 	| commands
 	| function
 	| special_variables
+	| common_keywords
 	| storage_keywords
 	| class_keywords
 	| foreign_keywords
