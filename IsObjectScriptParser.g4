@@ -253,6 +253,16 @@ special_variables:
 	| F_ZTRAP
 	| F_ZVERSION;
 
+// Common keywords
+common_keywords:
+    On
+    | As
+    | Of
+    | List
+    | Array
+    | ByRef
+    | Output;
+
 // Keywords Reference B: Class Keywords
 class_keywords:
 	Abstract
@@ -500,7 +510,7 @@ arguments: argument_list*;
 argument_list: argument | (P_COMMA argument);
 argument: ((ByRef | Output)? identifier type_definition? argument_default?)
 	| (identifier TripplePeriod);
-argument_default: assignment_operator (literal | block);
+argument_default: assignment_operator unary_expression;
 
 property_expression_list:
 	identifier
@@ -584,7 +594,7 @@ conditional_expression: primary_expression;
 
 assignment_operator: P_EQUAL_SIGN;
 
-assignment: unary_expression assignment_operator expression;
+assignment: (unary_expression | ( OPEN_PARENTHESIS unary_expression (P_COMMA unary_expression)* CLOSE_PARENTHESIS )) assignment_operator expression;
 
 unary_expression:
 	primary_expression
@@ -595,6 +605,7 @@ primary_expression:
 		P_UNDESCORE (
 			literal
 			| member_access
+			| identifier member_access*
 			| identifier
 				| f_order
             	| f_select
@@ -607,10 +618,11 @@ primary_expression:
 			| macro_invocation
 			| user_function_call
 			| sql_field_name
+			| parenthesis_block
 		)
 	)*;
 primary_expression_start:
-	literal
+    literal
 	| member_access
 	| identifier member_access*
 		| f_order
@@ -623,7 +635,8 @@ primary_expression_start:
 	| global
 	| macro_invocation
 	| user_function_call
-	| sql_field_name;
+	| sql_field_name
+	| parenthesis_block;
 
 literal: INTEGER_LITERAL | REAL_LITERAL | QUOTED_STRING;
 
@@ -632,7 +645,7 @@ statement: embedded_statement # embeddedStatement;
 embedded_statement: block | embedded_statement_simple;
 
 statement_list: statement+;
-block: OPEN_BRACE statement_list CLOSE_BRACE;
+block: OPEN_BRACE statement_list* CLOSE_BRACE;
 method_body: block;
 
 embedded_statement_simple:
@@ -655,7 +668,7 @@ function_with_arguments: function parenthesis_block;
 
 assignment_list: assignment (P_COMMA assignment)*;
 c_quit: C_QUIT postcondition? expression?;
-c_set: C_SET postcondition? ( assignment_list | (OPEN_PARENTHESIS identifier (P_COMMA identifier)* CLOSE_PARENTHESIS) assignment_operator expression );
+c_set: C_SET postcondition? ( assignment_list | assignment );
 c_do: C_DO postcondition? expression;
 c_while: C_WHILE condition block;
 c_do_while: C_DO block c_while ;
@@ -663,12 +676,11 @@ c_for: C_FOR (assignment P_COLON expression P_COLON  expression)? block;
 c_kill: C_KILL (identifier (P_COMMA identifier)*)?;
 c_new: C_NEW (identifier (P_COMMA identifier)*)?;
 c_write:
-	C_WRITE postcondition? expression? ((
-                P_COMMA
-                | P_EXCLAMATION_MARK
-                | P_UNDESCORE
-            )+ expression
-    )*;
+	C_WRITE postcondition? expression? (
+                ( P_COMMA expression )
+                | ( P_COMMA? P_EXCLAMATION_MARK )
+                | ( P_UNDESCORE expression )
+            )*;
 c_if:
 	C_IF condition (block | statement) (
 		(C_ELSE | C_ELSEIF) (block | statement)
@@ -752,6 +764,7 @@ identifier:
 	| commands
 	| function
 	| special_variables
+	| common_keywords
 	| storage_keywords
 	| class_keywords
 	| foreign_keywords
