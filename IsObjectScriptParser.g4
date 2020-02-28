@@ -255,183 +255,183 @@ special_variables:
 
 // Common keywords
 common_keywords:
-    On
-    | As
-    | Of
-    | List
-    | Array
-    | ByRef
-    | Output;
+    KW_On
+    | KW_As
+    | KW_Of
+    | KW_List
+    | KW_Array
+    | KW_ByRef
+    | KW_Output;
 
 // Keywords Reference B: Class Keywords
 class_keywords:
-	Abstract
-	| ClassType
-	| ClientDataType
-	| ClientName
-	| CompileAfter
-	| DdlAllowed
-	| DependsOn
-	| Deprecated
-	| Final
-	| GeneratedBy
-	| Hidden
-	| Inheritance
-	| Language
-	| LegacyInstanceContext
-	| NoExtent
-	| OdbcType
-	| Owner
-	| ProcedureBlock
-	| PropertyClass
-	| ServerOnly
-	| SoapBindingStyle
-	| SoapBodyUse
-	| SqlCategory
-	| SqlRowIdName
-	| SqlRowIdPrivate
-	| SqlTableName
-	| StorageStrategy
-	| System
-	| ViewQuery;
+	KW_Abstract
+	| KW_ClassType
+	| KW_ClientDataType
+	| KW_ClientName
+	| KW_CompileAfter
+	| KW_DdlAllowed
+	| KW_DependsOn
+	| KW_Deprecated
+	| KW_Final
+	| KW_GeneratedBy
+	| KW_Hidden
+	| KW_Inheritance
+	| KW_Language
+	| KW_LegacyInstanceContext
+	| KW_NoExtent
+	| KW_OdbcType
+	| KW_Owner
+	| KW_ProcedureBlock
+	| KW_PropertyClass
+	| KW_ServerOnly
+	| KW_SoapBindingStyle
+	| KW_SoapBodyUse
+	| KW_SqlCategory
+	| KW_SqlRowIdName
+	| KW_SqlRowIdPrivate
+	| KW_SqlTableName
+	| KW_StorageStrategy
+	| KW_System
+	| KW_ViewQuery;
 
 // Reference C: Foreign Key Keywords
 foreign_keywords:
-	Internal
-	| NoCheck
-	| OnDelete
-	| OnUpdate
-	| SqlName;
+	KW_Internal
+	| KW_NoCheck
+	| KW_OnDelete
+	| KW_OnUpdate
+	| KW_SqlName;
 
 // Reference D: Index Keywords
 index_keywords:
-	Condition
-	| Data
-	| Extent
-	| IdKey
-	| Internal
-	| PrimaryKey
-	| SqlName
-	| Type
-	| Unique;
+	KW_Condition
+	| KW_Data
+	| KW_Extent
+	| KW_IdKey
+	| KW_Internal
+	| KW_PrimaryKey
+	| KW_SqlName
+	| KW_Type
+	| KW_Unique;
 
 // Reference E: Method Keywords
 method_keywords:
-	Abstract
-	| ClientName
-	| CodeMode
-	| Deprecated
-	| ExternalProcName
-	| Final
-	| ForceGenerate
-	| GenerateAfter
-	| Internal
-	| Language
-	| NotInheritable
-	| PlaceAfter
-	| Private
-	| ProcedureBlock
-	| PublicList
-	| ReturnResultsets
-	| ServerOnly
-	| SoapAction
-	| SoapBindingStyle
-	| SoapBodyUse
-	| SoapMessageName
-	| SoapNameSpace
-	| SoapRequestMessage
-	| SoapTypeNameSpace
-	| SqlName
-	| SqlProc
-	| WebMethod
-	| ZenMethod;
+	KW_Abstract
+	| KW_ClientName
+	| KW_CodeMode
+	| KW_Deprecated
+	| KW_ExternalProcName
+	| KW_Final
+	| KW_ForceGenerate
+	| KW_GenerateAfter
+	| KW_Internal
+	| KW_Language
+	| KW_NotInheritable
+	| KW_PlaceAfter
+	| KW_Private
+	| KW_ProcedureBlock
+	| KW_PublicList
+	| KW_ReturnResultsets
+	| KW_ServerOnly
+	| KW_SoapAction
+	| KW_SoapBindingStyle
+	| KW_SoapBodyUse
+	| KW_SoapMessageName
+	| KW_SoapNameSpace
+	| KW_SoapRequestMessage
+	| KW_SoapTypeNameSpace
+	| KW_SqlName
+	| KW_SqlProc
+	| KW_WebMethod
+	| KW_ZenMethod;
 
 // Reference F: Parameter Keywords
 parameter_keywords:
-	Abstract
-	| Constraint
-	| Deprecated
-	| Final
-	| Flags
-	| Internal;
+	KW_Abstract
+	| KW_Constraint
+	| KW_Deprecated
+	| KW_Final
+	| KW_Flags
+	| KW_Internal;
 
 // Reference G: Projection Keywords
-projection_keywords: Internal;
+projection_keywords: KW_Internal;
 
 // Reference H: Property Keywords
 property_keywords:
-	Aliases
-	| Calculated
-	| Cardinality
-	| ClientName
-	| Collection
-	| Deprecated
-	| Final
-	| Identity
-	| InitialExpression
-	| Internal
-	| Inverse
-	| MultiDimensional
-	| OnDelete
-	| Private
-	| ReadOnly
-	| Required
-	| ServerOnly
-	| SqlColumnNumber
-	| SqlComputeCode
-	| SqlComputed
-	| SqlComputeOnChange
-	| SqlFieldName
-	| SqlListDelimiter
-	| SqlListType
-	| Transient;
+	KW_Aliases
+	| KW_Calculated
+	| KW_Cardinality
+	| KW_ClientName
+	| KW_Collection
+	| KW_Deprecated
+	| KW_Final
+	| KW_Identity
+	| KW_InitialExpression
+	| KW_Internal
+	| KW_Inverse
+	| KW_MultiDimensional
+	| KW_OnDelete
+	| KW_Private
+	| KW_ReadOnly
+	| KW_Required
+	| KW_ServerOnly
+	| KW_SqlColumnNumber
+	| KW_SqlComputeCode
+	| KW_SqlComputed
+	| KW_SqlComputeOnChange
+	| KW_SqlFieldName
+	| KW_SqlListDelimiter
+	| KW_SqlListType
+	| KW_Transient;
 
 // Reference I: Query Keywords
 query_keywords:
-	ClientName
-	| Final
-	| Internal
-	| Private
-	| SoapBindingStyle
-	| SoapBodyUse
-	| SoapNameSpace
-	| SqlName
-	| SqlProc
-	| SqlView
-	| SqlViewName
-	| WebMethod;
+	KW_ClientName
+	| KW_Final
+	| KW_Internal
+	| KW_Private
+	| KW_SoapBindingStyle
+	| KW_SoapBodyUse
+	| KW_SoapNameSpace
+	| KW_SqlName
+	| KW_SqlProc
+	| KW_SqlView
+	| KW_SqlViewName
+	| KW_WebMethod;
 
 // Reference J: Trigger Keywords
 trigger_keywords:
-	CodeMode
-	| Event
-	| Final
-	| Foreach
-	| Internal
-	| Language
-	| NewTable
-	| OldTable
-	| Order
-	| SqlName
-	| Time
-	| UpdateColumnList;
+	KW_CodeMode
+	| KW_Event
+	| KW_Final
+	| KW_Foreach
+	| KW_Internal
+	| KW_Language
+	| KW_NewTable
+	| KW_OldTable
+	| KW_Order
+	| KW_SqlName
+	| KW_Time
+	| KW_UpdateColumnList;
 
 // Reference K: XData Keywords
-xdata_keywords: Internal | MimeType | SchemaSpec | XMLNamespace;
+xdata_keywords: KW_Internal | KW_MimeType | KW_SchemaSpec | KW_XMLNamespace;
 
 // Reference L: Storage Keywords
 storage_keywords:
-	DataLocation
-	| DefaultData
-	| Final
-	| IdLocation
-	| IndexLocation
-	| SqlRowIdName
-	| SqlRowIdProperty
-	| SqlTableNumber
-	| State
-	| StreamLocation
-	| Type;
+	KW_DataLocation
+	| KW_DefaultData
+	| KW_Final
+	| KW_IdLocation
+	| KW_IndexLocation
+	| KW_SqlRowIdName
+	| KW_SqlRowIdProperty
+	| KW_SqlTableNumber
+	| KW_State
+	| KW_StreamLocation
+	| KW_Type;
 
 // Logical operators
 logical_operators:
@@ -508,7 +508,7 @@ parameter_argument:
 formal_spec: OPEN_PARENTHESIS arguments CLOSE_PARENTHESIS;
 arguments: argument_list*;
 argument_list: argument | (P_COMMA argument);
-argument: ((ByRef | Output)? identifier type_definition? argument_default?)
+argument: ((KW_ByRef | KW_Output)? identifier type_definition? argument_default?)
 	| (identifier TripplePeriod);
 argument_default: assignment_operator unary_expression;
 
@@ -522,7 +522,7 @@ includename_list:
 
 classname: identifier (P_DOT identifier)*;
 
-class_extend: Extends (classname | classname_list);
+class_extend: KW_Extends (classname | classname_list);
 classname_list:
 	OPEN_PARENTHESIS classname (P_COMMA classname)* CLOSE_PARENTHESIS;
 
@@ -545,7 +545,7 @@ common_member_declaration:
 	| xdata_definition
 	| storage_definition;
 
-type_definition: As ((List | Array) Of)? classname;
+type_definition: KW_As ((KW_List | KW_Array) KW_Of)? classname;
 
 // Expressions
 sql_field_name: OPEN_BRACE identifier CLOSE_BRACE;
@@ -697,31 +697,31 @@ storage_block: OPEN_BRACE xml_document CLOSE_BRACE;
 
 // ForeignKey name(key_props) References referenced_class(ref_index) [ keyword_list ]; ex:
 // ForeignKey EmpKey(EmpId) References MyApp.Employee(EmpID) [ OnDelete = cascade ];
-foreignkey_definition: ForeignKey identifier P_SEMICOLON;
+foreignkey_definition: KW_ForeignKey identifier P_SEMICOLON;
 
 // Index name On property_expression_list [ keyword_list ];
 index_definition:
-	Index identifier On property_expression_list cl_attributes? P_SEMICOLON;
+	KW_Index identifier KW_On property_expression_list cl_attributes? P_SEMICOLON;
 
 // Parameter name As parameter_type [ keyword_list ] = value ; ex: Parameter SERVICENAME =
 // "SOAPDemo" ;
 parameter_definition:
-	Parameter identifier P_EQUAL_SIGN (identifier | literal) P_SEMICOLON;
+	KW_Parameter identifier P_EQUAL_SIGN (identifier | literal) P_SEMICOLON;
 
 // Projection name As projection_class (parameter_list) ;
 projection_definition:
-	Projection identifier parameters? P_SEMICOLON;
+	KW_Projection identifier parameters? P_SEMICOLON;
 
 // Property name As classname (parameter_list) [ keyword_list ] ; / description Property name As
 // List Of classname (parameter_list) [ keyword_list ] ; Property name As Array Of classname
 // (parameter_list) [ keyword_list ] ; ex: Property SSN As %String(PATTERN = "3N1""-""2N1""-""4N") [
 // Required ];
 property_definition:
-	Property identifier type_definition parameters? cl_attributes? P_SEMICOLON;
+	KW_Property identifier type_definition parameters? cl_attributes? P_SEMICOLON;
 
 // Relationship name As classname [ keyword_list ] ;
 relationship_definition:
-	Relationship identifier type_definition cl_attributes? P_SEMICOLON;
+	KW_Relationship identifier type_definition cl_attributes? P_SEMICOLON;
 
 // Method name(formal_spec) As returnclass [ keyword_list ] { implementation } ClassMethod
 // name(formal_spec) As returnclass [ keyword_list ] { implementation } ClientMethod
@@ -733,30 +733,30 @@ relationship_definition:
  }
  */
 method_definition:
-	(Method | ClassMethod) identifier formal_spec type_definition? cl_attributes? method_body;
+	(KW_Method | KW_ClassMethod) identifier formal_spec type_definition? cl_attributes? method_body;
 
 // Query name(formal_spec) As classname [ keyword_list ]  { implementation }
 query_definition:
-	Query identifier formal_spec type_definition? cl_attributes?;
+	KW_Query identifier formal_spec type_definition? cl_attributes?;
 
 // Trigger name [ keyword_list ]  { code }
-trigger_definition: Trigger identifier cl_attributes? method_body;
+trigger_definition: KW_Trigger identifier cl_attributes? method_body;
 
 // XData name [ keyword_list ]  { data }
-xdata_definition: XData identifier cl_attributes?;
+xdata_definition: KW_XData identifier cl_attributes?;
 
 // Storage
-storage_definition: Storage identifier storage_block;
+storage_definition: KW_Storage identifier storage_block;
 
 // Class includes
-class_import: Import (classname | classname_list);
-class_include: Include (includename | includename_list);
-class_includegenerator: IncludeGenerator (includename | includename_list);
+class_import: KW_Import (classname | classname_list);
+class_include: KW_Include (includename | includename_list);
+class_includegenerator: KW_IncludeGenerator (includename | includename_list);
 
 // Class definition
 class_definition:
     (class_import | class_include | class_includegenerator)*
-	Class classname (class_extend)? cl_attributes? class_body;
+	KW_Class classname (class_extend)? cl_attributes? class_body;
 
 // Identifier
 identifier:
@@ -775,5 +775,5 @@ identifier:
 	| query_keywords
 	| trigger_keywords
 	| xdata_keywords
-	| Property
-	| As;
+	| KW_Property
+	| KW_As;

@@ -142,13 +142,13 @@ LO_And: FP_AMPERSAND FP_AMPERSAND;
 LO_Or: FP_VERTICAL_BAR FP_VERTICAL_BAR;
 
 // Common keywords
-On: O N;
-As: A S;
-Of: O F;
-List: L I S T;
-Array: A R R A Y;
-ByRef: B Y R E F;
-Output: O U T P U T;
+KW_On: O N;
+KW_As: A S;
+KW_Of: O F;
+KW_List: L I S T;
+KW_Array: A R R A Y;
+KW_ByRef: B Y R E F;
+KW_Output: O U T P U T;
 
 // RCOS_FUNCTIONS href = DocBook.UI.Page.cls?KEY=RCOS_FUNCTIONS
 F_ASCII: FP_DOLLAR_SIGN  ((A S C I I) | (A));
@@ -391,140 +391,140 @@ C_MVPRINT:  ((M V P R I N T) | (M V P));
 
 
 // Reference A: Class Definitions
-Class: C L A S S;
-Extends: E X T E N D S;
-Parameter: P A R A M E T E R;
-Property: P R O P E R T Y;
-ForeignKey: F O R E I G N K E Y;
-Index: I N D E X;
-Method: M E T H O D;
-ClassMethod: C L A S S M E T H O D;
-ClientMethod: C L I E N T M E T H O D;
-Projection: P R O J E C T I O N;
-Relationship: R E L A T I O N S H I P;
-Query: Q U E R Y;
-Trigger: T R I G G E R;
-XData: X D A T A ;
-Import: I M P O R T;
-Include: I N C L U D E;
-IncludeGenerator: I N C L U D E G E N E R A T O R;
+KW_Class: C L A S S;
+KW_Extends: E X T E N D S;
+KW_Parameter: P A R A M E T E R;
+KW_Property: P R O P E R T Y;
+KW_ForeignKey: F O R E I G N K E Y;
+KW_Index: I N D E X;
+KW_Method: M E T H O D;
+KW_ClassMethod: C L A S S M E T H O D;
+KW_ClientMethod: C L I E N T M E T H O D;
+KW_Projection: P R O J E C T I O N;
+KW_Relationship: R E L A T I O N S H I P;
+KW_Query: Q U E R Y;
+KW_Trigger: T R I G G E R;
+KW_XData: X D A T A ;
+KW_Import: I M P O R T;
+KW_Include: I N C L U D E;
+KW_IncludeGenerator: I N C L U D E G E N E R A T O R;
 
 // Reference B: Class Keywords
-Abstract: 'Abstract';
-ClassType: 'ClassType';
-ClientDataType: 'ClientDataType';
-ClientName: 'ClientName';
-CompileAfter: 'CompileAfter';
-DdlAllowed: 'DdlAllowed';
-DependsOn: 'DependsOn';
-Deprecated: 'Deprecated';
-Final: 'Final';
-GeneratedBy: 'GeneratedBy';
-Hidden: 'Hidden';
-Inheritance: 'Inheritance';
-Language: 'Language';
-LegacyInstanceContext: 'LegacyInstanceContext';
-NoExtent: 'NoExtent';
-OdbcType: 'OdbcType';
-Owner: 'Owner';
-ProcedureBlock: 'ProcedureBlock';
-PropertyClass: 'PropertyClass';
-ServerOnly: 'ServerOnly';
-SoapBindingStyle: 'SoapBindingStyle';
-SoapBodyUse: 'SoapBodyUse';
-SqlCategory: 'SqlCategory';
-SqlRowIdName: 'SqlRowIdName';
-SqlRowIdPrivate: 'SqlRowIdPrivate';
-SqlTableName: 'SqlTableName';
-StorageStrategy: 'StorageStrategy';
-System: 'System';
-ViewQuery: 'ViewQuery';
+KW_Abstract: 'Abstract';
+KW_ClassType: 'ClassType';
+KW_ClientDataType: 'ClientDataType';
+KW_ClientName: 'ClientName';
+KW_CompileAfter: 'CompileAfter';
+KW_DdlAllowed: 'DdlAllowed';
+KW_DependsOn: 'DependsOn';
+KW_Deprecated: 'Deprecated';
+KW_Final: 'Final';
+KW_GeneratedBy: 'GeneratedBy';
+KW_Hidden: 'Hidden';
+KW_Inheritance: 'Inheritance';
+KW_Language: 'Language';
+KW_LegacyInstanceContext: 'LegacyInstanceContext';
+KW_NoExtent: 'NoExtent';
+KW_OdbcType: 'OdbcType';
+KW_Owner: 'Owner';
+KW_ProcedureBlock: 'ProcedureBlock';
+KW_PropertyClass: 'PropertyClass';
+KW_ServerOnly: 'ServerOnly';
+KW_SoapBindingStyle: 'SoapBindingStyle';
+KW_SoapBodyUse: 'SoapBodyUse';
+KW_SqlCategory: 'SqlCategory';
+KW_SqlRowIdName: 'SqlRowIdName';
+KW_SqlRowIdPrivate: 'SqlRowIdPrivate';
+KW_SqlTableName: 'SqlTableName';
+KW_StorageStrategy: 'StorageStrategy';
+KW_System: 'System';
+KW_ViewQuery: 'ViewQuery';
 
 // Reference C: Foreign Key Keywords
-Internal: 'Internal';
-NoCheck: 'NoCheck';
-OnDelete: 'OnDelete';
-OnUpdate: 'OnUpdate';
-SqlName: 'SqlName';
+KW_Internal: 'Internal';
+KW_NoCheck: 'NoCheck';
+KW_OnDelete: 'OnDelete';
+KW_OnUpdate: 'OnUpdate';
+KW_SqlName: 'SqlName';
 
 // Reference D: Index Keywords
-Condition: 'Condition';
-Data: 'Data';
-Extent: 'Extent';
-IdKey: 'IdKey';
+KW_Condition: 'Condition';
+KW_Data: 'Data';
+KW_Extent: 'Extent';
+KW_IdKey: 'IdKey';
 //Internal: '';
-PrimaryKey: 'PrimaryKey';
+KW_PrimaryKey: 'PrimaryKey';
 //SqlName: '';
-Type: 'Type';
-Unique: 'Unique';
+KW_Type: 'Type';
+KW_Unique: 'Unique';
 
 // Reference E: Method Keywords
 //Abstract: '';
 //ClientName: '';
-CodeMode: 'CodeMode';
+KW_CodeMode: 'CodeMode';
 //Deprecated: '';
-ExternalProcName: 'ExternalProcName';
+KW_ExternalProcName: 'ExternalProcName';
 //Final: '';
-ForceGenerate: 'ForceGenerate';
-GenerateAfter: 'GenerateAfter';
+KW_ForceGenerate: 'ForceGenerate';
+KW_GenerateAfter: 'GenerateAfter';
 //Internal: '';
 //Language: '';
-NotInheritable: 'NotInheritable';
-PlaceAfter: 'PlaceAfter';
-Private: 'Private';
+KW_NotInheritable: 'NotInheritable';
+KW_PlaceAfter: 'PlaceAfter';
+KW_Private: 'Private';
 //ProcedureBlock: '';
-PublicList: 'PublicList';
-ReturnResultsets: 'ReturnResultsets';
+KW_PublicList: 'PublicList';
+KW_ReturnResultsets: 'ReturnResultsets';
 //ServerOnly: '';
-SoapAction: 'SoapAction';
+KW_SoapAction: 'SoapAction';
 //SoapBindingStyle: '';
 //SoapBodyUse: '';
-SoapMessageName: 'SoapMessageName';
-SoapNameSpace: 'SoapNameSpace';
-SoapRequestMessage: 'SoapRequestMessage';
-SoapTypeNameSpace: 'SoapTypeNameSpace';
+KW_SoapMessageName: 'SoapMessageName';
+KW_SoapNameSpace: 'SoapNameSpace';
+KW_SoapRequestMessage: 'SoapRequestMessage';
+KW_SoapTypeNameSpace: 'SoapTypeNameSpace';
 //SqlName: '';
-SqlProc: 'SqlProc';
-WebMethod: 'WebMethod';
-ZenMethod: 'ZenMethod';
+KW_SqlProc: 'SqlProc';
+KW_WebMethod: 'WebMethod';
+KW_ZenMethod: 'ZenMethod';
 
 // Reference F: Parameter Keywords
 //Abstract: '';
-Constraint: 'Constraint';
+KW_Constraint: 'Constraint';
 //Deprecated: '';
 //Final: '';
-Flags: 'Flags';
+KW_Flags: 'Flags';
 //Internal: '';
 
 // Reference G: Projection Keywords
 //Internal: '';
 
 // Reference H: Property Keywords
-Aliases: 'Aliases';
-Calculated: 'Calculated';
-Cardinality: 'Cardinality';
+KW_Aliases: 'Aliases';
+KW_Calculated: 'Calculated';
+KW_Cardinality: 'Cardinality';
 //ClientName: '';
-Collection: 'Collection';
+KW_Collection: 'Collection';
 //Deprecated: '';
 //Final: '';
-Identity: 'Identity';
-InitialExpression: 'InitialExpression';
+KW_Identity: 'Identity';
+KW_InitialExpression: 'InitialExpression';
 //Internal: '';
-Inverse: 'Inverse';
-MultiDimensional: 'MultiDimensional';
+KW_Inverse: 'Inverse';
+KW_MultiDimensional: 'MultiDimensional';
 //OnDelete: '';
 //Private: '';
-ReadOnly: 'ReadOnly';
-Required: 'Required';
+KW_ReadOnly: 'ReadOnly';
+KW_Required: 'Required';
 //ServerOnly: '';
-SqlColumnNumber: 'SqlColumnNumber';
-SqlComputeCode: 'SqlComputeCode';
-SqlComputed: 'SqlComputed';
-SqlComputeOnChange: 'SqlComputeOnChange';
-SqlFieldName: 'SqlFieldName';
-SqlListDelimiter: 'SqlListDelimiter';
-SqlListType: 'SqlListType';
-Transient: 'Transient';
+KW_SqlColumnNumber: 'SqlColumnNumber';
+KW_SqlComputeCode: 'SqlComputeCode';
+KW_SqlComputed: 'SqlComputed';
+KW_SqlComputeOnChange: 'SqlComputeOnChange';
+KW_SqlFieldName: 'SqlFieldName';
+KW_SqlListDelimiter: 'SqlListDelimiter';
+KW_SqlListType: 'SqlListType';
+KW_Transient: 'Transient';
 
 // Reference I: Query Keywords
 //ClientName: '';
@@ -536,44 +536,44 @@ Transient: 'Transient';
 //SoapNameSpace: '';
 //SqlName: '';
 //SqlProc: '';
-SqlView: 'SqlView';
-SqlViewName: 'SqlViewName';
+KW_SqlView: 'SqlView';
+KW_SqlViewName: 'SqlViewName';
 //WebMethod: '';
 
 // Reference J: Trigger Keywords
 //CodeMode: '';
-Event: 'Event';
+KW_Event: 'Event';
 //Final: '';
-Foreach: 'Foreach';
+KW_Foreach: 'Foreach';
 //Internal: '';
 //Language: '';
-NewTable: 'NewTable';
-OldTable: 'OldTable';
-Order: 'Order';
+KW_NewTable: 'NewTable';
+KW_OldTable: 'OldTable';
+KW_Order: 'Order';
 //SqlName: '';
-Time: 'Time';
-UpdateColumnList: 'UpdateColumnList';
+KW_Time: 'Time';
+KW_UpdateColumnList: 'UpdateColumnList';
 
 // Reference K: XData Keywords
 //Internal: '';
-MimeType: 'MimeType';
-SchemaSpec: 'SchemaSpec';
-XMLNamespace: 'XMLNamespace';
+KW_MimeType: 'MimeType';
+KW_SchemaSpec: 'SchemaSpec';
+KW_XMLNamespace: 'XMLNamespace';
 
 // Reference L: Storage Keywords
-DataLocation: 'DataLocation';
-DefaultData: 'DefaultData';
+KW_DataLocation: 'DataLocation';
+KW_DefaultData: 'DefaultData';
 //Final: '';
-IdLocation: 'IdLocation';
-IndexLocation: 'IndexLocation';
+KW_IdLocation: 'IdLocation';
+KW_IndexLocation: 'IndexLocation';
 //SqlRowIdName: '';
-SqlRowIdProperty: 'SqlRowIdProperty';
-SqlTableNumber: 'SqlTableNumber';
-State: 'State';
-StreamLocation: 'StreamLocation';
+KW_SqlRowIdProperty: 'SqlRowIdProperty';
+KW_SqlTableNumber: 'SqlTableNumber';
+KW_State: 'State';
+KW_StreamLocation: 'StreamLocation';
 //Type: '';
 
-Storage: 'Storage';
+KW_Storage: 'Storage';
 VAR_DECLARATION: FP_POUND_SIGN D I M;
 
 // identifers
