@@ -77,15 +77,14 @@ fragment ANY_CHAR: .;
 fragment CHAR: (F_LOWERCASE | F_UPPERCASE);
 //WS :	' ' -> channel(HIDDEN);
 WHITESPACE: (' ' | '\t') -> channel(HIDDEN);
-NEWLINE: ('\r'? '\n' | '\r')+ -> channel(HIDDEN);
+EOL: ('\r'? '\n' | '\r')+ -> channel(HIDDEN);
 
-SINGLE_LINE_DOC_COMMENT: '///' InputCharacter*    -> channel(COMMENTS_CHANNEL);
-SINGLE_LINE_COMMENT:     '//'  InputCharacter*    -> channel(COMMENTS_CHANNEL);
-DELIMITED_COMMENT:       '/*'  .*? '*/'           -> channel(COMMENTS_CHANNEL);
+SINGLE_LINE_DOC_COMMENT:        '///' InputCharacter*    -> channel(COMMENTS_CHANNEL);
+SINGLE_LINE_COMMENT:            '//'  InputCharacter*    -> channel(COMMENTS_CHANNEL);
+//SINGLE_LINE_COMMENT_SEMICOLON:  ';'  InputCharacter*     -> channel(COMMENTS_CHANNEL); // statement mode only (not class)
+DELIMITED_COMMENT:              '/*'  .*? '*/'           -> channel(COMMENTS_CHANNEL);
 
-ESQL
-    : '&sql(' ->pushMode(SQL_QUERY)
-    ;
+E_SQL: '&' S Q L '(' ->pushMode(M_SQL_QUERY);
 
 OPEN_BRACE: FP_OPEN_BRACE;
 CLOSE_BRACE: FP_CLOSE_BRACE;
@@ -110,6 +109,7 @@ P_PERCENT_SIGN: FP_PERCENT_SIGN;
 P_ASTERISK: FP_ASTERISK;
 P_VERTICAL_BAR: FP_VERTICAL_BAR;
 P_APOSTROPHE: FP_APOSTROPHE;
+P_BACKSLASH: FP_BACKSLASH;
 
 ClassInvocation: P_POUND_SIGN P_POUND_SIGN C L A S S;
 DoublePeriod: P_DOT P_DOT;
@@ -274,6 +274,7 @@ F_ZWBPACK: FP_DOLLAR_SIGN  Z W B P A C K;
 F_ZWUNPACK: FP_DOLLAR_SIGN  Z W U N P A C K;
 F_ZWBUNPACK: FP_DOLLAR_SIGN  Z W B U N P A C K;
 F_ZZENKAKU: FP_DOLLAR_SIGN  Z Z E N K A K U;
+F_ZUTIL: FP_DOLLAR_SIGN Z U T I L;
 
 // RCOS_COMMANDS href = DocBook.UI.Page.cls?KEY=RCOS_COMMANDS
 C_BREAK:  ((B R E A K) | (B));
@@ -585,27 +586,10 @@ REAL_LITERAL: F_DIGIT* FP_DOT [0-9]+ ExponentPart?;
 
 QUOTED_STRING : FP_QUOTES ('""' | ~'"')* FP_QUOTES;
 
-mode EMBEDDED_SQL;
-SQL_E_CLOSE_PARENS: ')' -> popMode;
-SQL_E_OPEN_PARENS: '(' -> pushMode(SQL_QUERY);
-mode SQL_QUERY;
-SQL_CLOSE_PARENS: ')' -> popMode;
-SQL_OPEN_PARENS: '(' -> pushMode(SQL_QUERY);
-SQL_WHITESPACE: (' ' | '\t') -> channel(HIDDEN);
-SQL_NEWLINE: ('\r'? '\n' | '\r')+ -> channel(HIDDEN);
-SQL_COMMA: ',';
-SQL_DOT: '.';
-SQL_EQUAL: '=';
-SQL_LT: '<';
-SQL_GT: '>';
-SQL_NOT_EQUAL: '<>';
-SQL_GT_EQUAL: '>=';
-SQL_LT_EQUAL: '<=';
-SQL_ASTERISK: '*';
-SQL_UNDESCORE: '_';
-SQL_ID: FP_PERCENT_SIGN? CHAR (CHAR | F_DIGIT)*;
-SQL_WORD: CHAR+;
-SQL_VAR: ':' SQL_ID;
-SQL_INTEGER_LITERAL: F_DIGIT+;
-SQL_DOUBLE_QUOTE_STRING: '"' ~["]* '"';
-SQL_SINGLE_QUOTE_STRING: '\'' ~[']* '\'';
+ERROR_TEXT: ANY_CHAR;
+
+mode M_SQL_QUERY;
+
+SQL_QUERY_STRING: ~[)(]+;
+SQL_QUERY_END: ')' -> popMode;
+SQL_QUERY_BEGIN: '(' -> pushMode(M_SQL_QUERY);
