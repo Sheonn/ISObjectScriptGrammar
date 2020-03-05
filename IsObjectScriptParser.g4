@@ -23,24 +23,20 @@ chardata:
 
 // SQL
 embedded_sql:
-	ESQL sql_query (SQL_E_CLOSE_PARENS | SQL_CLOSE_PARENS);
-sql_query: (inner_sql | SQL_INTEGER_LITERAL  | SQL_ID | SQL_COMMA | SQL_ASTERISK | SQL_UNDESCORE |
-                        SQL_DOT |
-                        SQL_EQUAL |
-                        SQL_VAR |
-                        SQL_DOUBLE_QUOTE_STRING |
-                        SQL_SINGLE_QUOTE_STRING )+;
-inner_sql: SQL_OPEN_PARENS sql_query SQL_CLOSE_PARENS;
-	/*OPEN_PARENTHESIS sql_query CLOSE_PARENTHESIS;
-sql_query: (sql_inner | sql_string | sql_identifier | sql_name)*;
-sql_inner: OPEN_PARENTHESIS sql_query CLOSE_PARENTHESIS;
-sql_identifier: P_COLON identifier;
-sql_name: (identifier | P_DOT | P_UNDESCORE | P_ASTERISK | P_COMMA);
-sql_string: (literal | (P_APOSTROPHE  P_APOSTROPHE));
-*/
+	E_SQL sql_query+ SQL_QUERY_END;
+sql_query:
+    SQL_QUERY_STRING
+    | SQL_QUERY_BEGIN sql_query+ SQL_QUERY_END;
+
 // Functions
-function:
-	F_ASCII
+kw_function:
+    F_ORDER
+    | F_SELECT
+    | F_EXTRACT
+    | F_LISTBUILD
+    | F_LISTGET
+    | F_GET
+	| F_ASCII
 	| F_BIT
 	| F_BITCOUNT
 	| F_BITFIND
@@ -53,11 +49,9 @@ function:
 	| F_DATA
 	| F_DECIMAL
 	| F_DOUBLE
-	| F_EXTRACT
 	| F_FACTOR
 	| F_FIND
 	| F_FNUMBER
-	| F_GET
 	| F_INCREMENT
 	| F_INUMBER
 	| F_ISOBJECT
@@ -66,11 +60,9 @@ function:
 	| F_JUSTIFY
 	| F_LENGTH
 	| F_LIST
-	| F_LISTBUILD
 	| F_LISTDATA
 	| F_LISTFIND
 	| F_LISTFROMSTRING
-	| F_LISTGET
 	| F_LISTLENGTH
 	| F_LISTNEXT
 	| F_LISTSAME
@@ -99,7 +91,6 @@ function:
 	| F_REPLACE
 	| F_REVERSE
 	| F_SCONVERT
-	| F_SELECT
 	| F_SEQUENCE
 	| F_SORTBEGIN
 	| F_SORTEND
@@ -162,32 +153,36 @@ function:
 	| F_ZWBPACK
 	| F_ZWUNPACK
 	| F_ZWBUNPACK
-	| F_ZZENKAKU;
+	| F_ZZENKAKU
+	| F_ZUTIL
+	| F_ZOBJPROPERTY;
 
 // Commands
-commands:
-	C_BREAK
+kw_commands:
+    C_WRITE
+    | C_QUIT
+    | C_SET
+    | C_IF
+    | C_ELSE
+    | C_ELSEIF
+    | C_WHILE
+    | C_DO
+    | C_FOR
+    | C_KILL
+    | C_NEW
+	| C_BREAK
 	| C_CATCH
 	| C_CLOSE
 	| C_CONTINUE
-	| C_DO
-	| C_ELSE
-	| C_ELSEIF
-	| C_FOR
 	| C_GOTO
 	| C_HALT
 	| C_HANG
-	| C_IF
 	| C_JOB
-	| C_KILL
 	| C_LOCK
 	| C_MERGE
-	| C_NEW
 	| C_OPEN
-	| C_QUIT
 	| C_READ
 	| C_RETURN
-	| C_SET
 	| C_TCOMMIT
 	| C_THROW
 	| C_TROLLBACK
@@ -195,8 +190,6 @@ commands:
 	| C_TSTART
 	| C_USE
 	| C_VIEW
-	| C_WHILE
-	| C_WRITE
 	| C_XECUTE
 	| C_ZKILL
 	| C_ZNSPACE
@@ -265,7 +258,24 @@ common_keywords:
 
 // Keywords Reference B: Class Keywords
 class_keywords:
-	KW_Abstract
+    KW_Class
+    | KW_Extends
+    | KW_Parameter
+    | KW_Property
+    | KW_ForeignKey
+    | KW_Index
+    | KW_Method
+    | KW_ClassMethod
+    | KW_ClientMethod
+    | KW_Projection
+    | KW_Relationship
+    | KW_Query
+    | KW_Trigger
+    | KW_XData
+    | KW_Import
+    | KW_Include
+    | KW_IncludeGenerator
+	| KW_Abstract
 	| KW_ClassType
 	| KW_ClientDataType
 	| KW_ClientName
@@ -449,7 +459,9 @@ logical_operators:
 	| LO_BitwiseAnd
 	| P_VERTICAL_BAR
 	| LO_And
-	| LO_Or;
+	| LO_Or
+	| P_COMMA
+	| OPEN_SQUARE_BRACKET;
 
 // Arithmetic Operators
 arithmetic_operators: P_MINUS_SIGN
@@ -458,7 +470,178 @@ arithmetic_operators: P_MINUS_SIGN
 | P_SLASH
 | ExponentiationOperator
 | P_APOSTROPHE
-| P_POUND_SIGN;
+| P_POUND_SIGN
+| P_BACKSLASH;
+
+// Functions
+function:
+    f_order
+    | f_select
+    | f_extract
+    | f_listbuild
+    | f_listget
+    | f_get
+    | f_case
+    | f_zobjproperty
+    | f_zutil
+	| F_ASCII
+	| F_BIT
+	| F_BITCOUNT
+	| F_BITFIND
+	| F_BITLOGIC
+	| F_CHAR
+	| F_CLASSMETHOD
+	| F_CLASSNAME
+	| F_COMPILE
+	| F_DATA
+	| F_DECIMAL
+	| F_DOUBLE
+	| F_FACTOR
+	| F_FIND
+	| F_FNUMBER
+	| F_INCREMENT
+	| F_INUMBER
+	| F_ISOBJECT
+	| F_ISVALIDDOUBLE
+	| F_ISVALIDNUM
+	| F_JUSTIFY
+	| F_LENGTH
+	| F_LIST
+	| F_LISTDATA
+	| F_LISTFIND
+	| F_LISTFROMSTRING
+	| F_LISTLENGTH
+	| F_LISTNEXT
+	| F_LISTSAME
+	| F_LISTTOSTRING
+	| F_LISTUPDATE
+	| F_LISTVALID
+	| F_LOCATE
+	| F_MATCH
+	| F_METHOD
+	| F_NAME
+	| F_NCONVERT
+	| F_NEXT
+	| F_NORMALIZE
+	| F_NOW
+	| F_NUMBER
+	| F_ORDER
+	| F_PARAMETER
+	| F_PIECE
+	| F_PREFETCHOFF
+	| F_PREFETCHON
+	| F_PROPERTY
+	| F_QLENGTH
+	| F_QSUBSCRIPT
+	| F_QUERY
+	| F_RANDOM
+	| F_REPLACE
+	| F_REVERSE
+	| F_SCONVERT
+	| F_SEQUENCE
+	| F_SORTBEGIN
+	| F_SORTEND
+	| F_STACK
+	| F_TEXT
+	| F_TRANSLATE
+	| F_VIEW
+	| F_WASCII
+	| F_WCHAR
+	| F_WEXTRACT
+	| F_WFIND
+	| F_WISWIDE
+	| F_WLENGTH
+	| F_WREVERSE
+	| F_XECUTE
+	| F_ZABS
+	| F_ZARCCOS
+	| F_ZARCSIN
+	| F_ZARCTAN
+	| F_ZBOOLEAN
+	| F_ZCONVERT
+	| F_ZCOS
+	| F_ZCOT
+	| F_ZCRC
+	| F_ZCSC
+	| F_ZCYC
+	| F_ZDASCII
+	| F_ZDATE
+	| F_ZDATEH
+	| F_ZDATETIME
+	| F_ZDATETIMEH
+	| F_ZDCHAR
+	| F_ZEXP
+	| F_ZF
+	| F_ZHEX
+	| F_ZISWIDE
+	| F_ZLASCII
+	| F_ZLCHAR
+	| F_ZLN
+	| F_ZLOG
+	| F_ZNAME
+	| F_ZPOSITION
+	| F_ZPOWER
+	| F_ZQASCII
+	| F_ZQCHAR
+	| F_ZSEARCH
+	| F_ZSEC
+	| F_ZSEEK
+	| F_ZSIN
+	| F_ZSQR
+	| F_ZSTRIP
+	| F_ZTAN
+	| F_ZTIME
+	| F_ZTIMEH
+	| F_ZVERSION
+	| F_ZWASCII
+	| F_ZWCHAR
+	| F_ZWIDTH
+	| F_ZWPACK
+	| F_ZWBPACK
+	| F_ZWUNPACK
+	| F_ZWBUNPACK
+	| F_ZZENKAKU;
+
+// Commands
+commands:
+    c_write
+    | c_quit
+    | c_set
+    | c_if
+    | c_do
+    | c_while
+    | c_do_while
+    | c_for
+    | c_kill
+    | c_new
+    | c_tstart
+    | c_tcommit
+    | c_trollback
+    | c_merge
+    | c_continue
+    | c_zwrite
+    | c_xecute
+	| C_BREAK
+	| C_CATCH
+	| C_CLOSE
+	| C_GOTO
+	| C_HALT
+	| C_HANG
+	| C_JOB
+	| C_LOCK
+	| C_OPEN
+	| C_READ
+	| C_RETURN
+	| C_THROW
+	| C_TRY
+	| C_USE
+	| C_VIEW
+	| C_ZKILL
+	| C_ZNSPACE
+	| C_ZTRAP
+	| C_ZZDUMP
+	| C_ZZWRITE
+	| c_dim;
 
 attribute_identifier:
 	class_keywords
@@ -473,6 +656,10 @@ attribute_identifier:
 	| trigger_keywords
 	| xdata_keywords;
 
+// Query parameters
+query_parameters:
+    parameters;
+
 // Attributes
 cl_attributes:
 	OPEN_SQUARE_BRACKET attribute_list CLOSE_SQUARE_BRACKET;
@@ -480,14 +667,12 @@ cl_attributes:
 attribute_list: cl_attribute (P_COMMA cl_attribute)*;
 
 cl_attribute:
-	attribute_identifier (P_EQUAL_SIGN attribute_argument)?;
+	attribute_identifier (assignment_operator attribute_argument)?;
 
 attribute_argument:
-	classname
-	| classname_list
-	| block
-	| QUOTED_STRING
-	| INTEGER_LITERAL;
+    block
+	| expression
+	| arithmetic_operators;
 
 // Parameters
 parameter_identifier: identifier;
@@ -510,7 +695,7 @@ arguments: argument_list*;
 argument_list: argument | (P_COMMA argument);
 argument: ((KW_ByRef | KW_Output)? identifier type_definition? argument_default?)
 	| (identifier TripplePeriod);
-argument_default: assignment_operator unary_expression;
+argument_default: assignment_operator expression;
 
 property_expression_list:
 	identifier
@@ -549,30 +734,35 @@ type_definition: KW_As ((KW_List | KW_Array) KW_Of)? classname;
 
 // Expressions
 sql_field_name: OPEN_BRACE identifier CLOSE_BRACE;
-var_declaration: VAR_DECLARATION identifier type_definition assignment_operator expression;
-class_invocation:
-	ClassInvocation OPEN_PARENTHESIS classname CLOSE_PARENTHESIS;
+local_array: identifier OPEN_PARENTHESIS (expression | (P_COMMA expression))+ CLOSE_PARENTHESIS;
+classmethod_invocation:
+	ClassInvocation OPEN_PARENTHESIS classname CLOSE_PARENTHESIS member_access;
 global:
-	P_CARET (P_VERTICAL_BAR P_VERTICAL_BAR)? classname parenthesis_block?;
+	P_CARET (LO_Or)? classname parenthesis_block?;
+routine: identifier? P_CARET classname parenthesis_block?;
 macro_invocation: MacroInvocationPrefix identifier parenthesis_block?;
-user_function_call: UserFunctionCallPrefix identifier parenthesis_block?;
+user_function_call: UserFunctionCallPrefix routine;
 
 postcondition: P_COLON condition;
 
 condition: (OPEN_PARENTHESIS condition CLOSE_PARENTHESIS)
 	| condition logical_operators condition
-	| P_APOSTROPHE expression
 	| expression;
 
-arithmetic: arithmetic_operators;
+arithmetic_operation:
+    OPEN_PARENTHESIS arithmetic_operation CLOSE_PARENTHESIS
+    | expression arithmetic_operators expression;
+
+local_member_access:
+    local_access_method
+    | local_access_property
+    | local_access_parameter;
 
 member_access:
-	access_method
-	| access_property
-	| local_access_method
-	| access_parameter
-	| local_access_property
-	| local_access_parameter;
+	access_property
+	| access_method
+	| access_parameter;
+
 local_access_property: DoublePeriod identifier;
 local_access_method: DoublePeriod identifier parenthesis_block;
 local_access_parameter: DoublePeriod P_POUND_SIGN identifier;
@@ -582,98 +772,86 @@ access_parameter: P_DOT P_POUND_SIGN identifier;
 
 parenthesis_block:
 	OPEN_PARENTHESIS parenthesis_block_parameters CLOSE_PARENTHESIS;
-parenthesis_block_parameters: parenthesis_block_parameter*;
-parenthesis_block_parameter: expression | P_COMMA;
-
-expression: non_assignment_expression | unary_expression;
-//unary_expression | member_access | function_with_arguments;
-expression_list: expression (P_COMMA expression)*;
-non_assignment_expression: conditional_expression;
-
-conditional_expression: primary_expression;
+parenthesis_block_parameters: ( P_COMMA* ( P_DOT? expression ) )*;
 
 assignment_operator: P_EQUAL_SIGN;
+assignment: (assignment_expression | ( OPEN_PARENTHESIS assignment_expression (P_COMMA assignment_expression)* CLOSE_PARENTHESIS )) assignment_operator expression;
 
-assignment: (unary_expression | ( OPEN_PARENTHESIS unary_expression (P_COMMA unary_expression)* CLOSE_PARENTHESIS )) assignment_operator expression;
+expression:
+    P_APOSTROPHE expression
+    | P_MINUS_SIGN expression
+    | P_PLUS_SIGN expression
+    | P_AT ( literal | identifier )
+    | literal
+          | local_member_access member_access*
+      	| identifier member_access+
+      	| function
+      	| function_with_arguments
+      	| local_array
+      	| special_variables
+      	| classmethod_invocation
+      	| global
+      	| macro_invocation
+      	| user_function_call
+      	| sql_field_name
+      	| identifier
+      	| OPEN_BRACE expression CLOSE_BRACE
+    | expression arithmetic_operators expression
+        | expression logical_operators expression
+        | OPEN_PARENTHESIS expression CLOSE_PARENTHESIS
+    | expression (P_UNDESCORE expression)+
 
-unary_expression:
-	primary_expression
-	| P_MINUS_SIGN unary_expression
-	| P_PLUS_SIGN unary_expression;
-primary_expression:
-	primary_expression_start (
-		P_UNDESCORE (
-			literal
-			| member_access
-			| identifier member_access*
-			| identifier
-				| f_order
-            	| f_select
-            	| f_extract
-			| function
-			| function_with_arguments
-			| special_variables
-			| class_invocation
-			| global
-			| macro_invocation
-			| user_function_call
-			| sql_field_name
-			| parenthesis_block
-		)
-	)*;
-primary_expression_start:
-    literal
-	| member_access
-	| identifier member_access*
-		| f_order
-    	| f_select
-    	| f_extract
-	| function
-	| function_with_arguments
-	| special_variables
-	| class_invocation
-	| global
-	| macro_invocation
-	| user_function_call
-	| sql_field_name
-	| parenthesis_block;
+    ;
+
+assignment_expression:
+    local_member_access member_access*
+    | identifier member_access+
+    | local_array
+    | special_variables
+    | global
+    | macro_invocation
+    | function
+    | OPEN_BRACE assignment_expression CLOSE_BRACE
+    | identifier;
 
 literal: INTEGER_LITERAL | REAL_LITERAL | QUOTED_STRING;
 
 // Statements
-statement: embedded_statement # embeddedStatement;
+statement: embedded_statement # EmbeddedStatement;
 embedded_statement: block | embedded_statement_simple;
 
-statement_list: statement+;
-block: OPEN_BRACE statement_list* CLOSE_BRACE;
+statement_list: statement*;
+block: OPEN_BRACE statement_list CLOSE_BRACE;
 method_body: block;
 
 embedded_statement_simple:
-    embedded_sql
-	| c_write
-	| c_quit
-	| c_set
-	| c_if
-	| c_do
-	| c_while
-	| c_do_while
-	| c_for
-	| c_kill
-	| c_new
-	| var_declaration
-	| commands postcondition? expression?
-	| expression;
+    commands
+    | function
+    | embedded_sql
+    | label
+	| comment_semicolon;
 
 function_with_arguments: function parenthesis_block;
 
 assignment_list: assignment (P_COMMA assignment)*;
+
+c_dim: VAR_DECLARATION identifier type_definition assignment_operator expression;
 c_quit: C_QUIT postcondition? expression?;
-c_set: C_SET postcondition? ( assignment_list | assignment );
-c_do: C_DO postcondition? expression;
+c_set: C_SET postcondition? (assignment | assignment_list);
+c_do: C_DO postcondition?
+    ( local_access_method
+    | routine
+    | local_member_access member_access* access_method
+    | classmethod_invocation parenthesis_block
+    | identifier member_access* access_method )
+    | ( P_DOT+ statement )+
+    ;
+
 c_while: C_WHILE condition block;
 c_do_while: C_DO block c_while ;
-c_for: C_FOR (assignment P_COLON expression P_COLON  expression)? block;
-c_kill: C_KILL (identifier (P_COMMA identifier)*)?;
+c_for: C_FOR ( assignment ( ( P_COLON expression )? P_COLON expression )? )? block;
+c_kill: C_KILL postcondition? (assignment_expression (P_COMMA assignment_expression)*)?;
+c_merge: C_MERGE postcondition? assignment_expression assignment_operator assignment_expression;
 c_new: C_NEW (identifier (P_COMMA identifier)*)?;
 c_write:
 	C_WRITE postcondition? expression? (
@@ -682,14 +860,30 @@ c_write:
                 | ( P_UNDESCORE expression )
             )*;
 c_if:
-	C_IF condition (block | statement) (
-		(C_ELSE | C_ELSEIF) (block | statement)
-	)*;
+	C_IF condition ( block | statement ) (
+		C_ELSEIF condition ( block | statement )
+	)* (C_ELSE ( block | statement ) )?;
+c_tstart: C_TSTART postcondition?;
+c_tcommit: C_TCOMMIT postcondition?;
+c_trollback: C_TROLLBACK postcondition;
+c_continue: C_CONTINUE postcondition;
+c_zwrite: C_ZWRITE postcondition? identifier;
+c_xecute: C_XECUTE postcondition? expression;
 
 // functions
 f_select: F_SELECT OPEN_PARENTHESIS (condition P_COLON expression (P_COMMA condition P_COLON expression)*) CLOSE_PARENTHESIS;
+f_case: F_CASE OPEN_PARENTHESIS ( condition ( P_COMMA expression? P_COLON expression )+ ) CLOSE_PARENTHESIS;
 f_order: F_ORDER OPEN_PARENTHESIS expression (P_COMMA expression)? (P_COMMA expression)? CLOSE_PARENTHESIS;
 f_extract: F_EXTRACT OPEN_PARENTHESIS expression (P_COMMA (expression | P_ASTERISK))? (P_COMMA (expression | P_ASTERISK))? CLOSE_PARENTHESIS;
+f_listbuild: F_LISTBUILD OPEN_PARENTHESIS (expression (P_COMMA expression)*)? CLOSE_PARENTHESIS;
+f_listget: F_LISTGET OPEN_PARENTHESIS expression (P_COMMA expression (P_COMMA expression)?)? CLOSE_PARENTHESIS;
+f_get: F_GET OPEN_PARENTHESIS expression (P_COMMA expression)? CLOSE_PARENTHESIS;
+f_zobjproperty: F_ZOBJPROPERTY OPEN_PARENTHESIS expression P_COMMA expression CLOSE_PARENTHESIS;
+f_zutil: F_ZUTIL OPEN_PARENTHESIS expression ( P_COMMA expression )* CLOSE_PARENTHESIS;
+
+label: EOL? identifier parenthesis_block?;
+
+comment_semicolon: P_SEMICOLON ( identifier | ERROR_TEXT | P_COMMA | P_DOT | arithmetic_operators )*;
 
 storage_block: OPEN_BRACE xml_document CLOSE_BRACE;
 
@@ -733,11 +927,11 @@ relationship_definition:
  }
  */
 method_definition:
-	(KW_Method | KW_ClassMethod) identifier formal_spec type_definition? cl_attributes? method_body;
+	(KW_Method | KW_ClassMethod) identifier formal_spec type_definition? cl_attributes? method_body?;
 
 // Query name(formal_spec) As classname [ keyword_list ]  { implementation }
 query_definition:
-	KW_Query identifier formal_spec type_definition? cl_attributes?;
+	KW_Query identifier formal_spec type_definition? cl_attributes? query_parameters? OPEN_BRACE sql_query CLOSE_BRACE;
 
 // Trigger name [ keyword_list ]  { code }
 trigger_definition: KW_Trigger identifier cl_attributes? method_body;
@@ -761,8 +955,8 @@ class_definition:
 // Identifier
 identifier:
 	IDENTIFIER
-	| commands
-	| function
+	| kw_commands
+	| kw_function
 	| special_variables
 	| common_keywords
 	| storage_keywords
